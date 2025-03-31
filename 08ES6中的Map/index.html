@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        // 特点：
+        // 键可以是任何类型，包括对象、函数等（而普通对象的键只能是字符串或Symbol）
+        // 保持插入顺序
+        // 具有更好的性能，特别是在频繁增删键值对的场景
+
+        // 常用方法：
+        // set(key, value): 添加或更新键值对
+        // get(key): 获取指定键的值
+        // has(key): 检查是否存在指定的键
+        // delete (key): 删除指定的键值对
+        // clear(): 清空Map
+        // size: 获取Map的大小（键值对数量）
+
+        // 创建一个新的Map
+        let myMap = new Map();
+
+        // 添加键值对
+        myMap.set('key1', 'value1');
+        myMap.set(42, 'value2');
+        myMap.set({ a: 1 }, 'value3');
+
+        // 获取值
+        console.log(myMap.get('key1')); // 'value1'
+
+        // 检查键是否存在
+        console.log(myMap.has(42)); // true
+
+        // 删除键值对
+        myMap.delete(42);
+
+        // 获取Map的大小
+        console.log(myMap.size); // 2
+    </script>
+
+    <script>
+        // 遍历map
+        let myMap1 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+
+        // 遍历键值对
+        myMap1.forEach((value, key) => {
+            console.log(key, value);
+        });
+
+        // 获取所有的键
+        console.log([...myMap1.keys()]); // ['a', 'b', 'c']
+
+        // 获取所有的值
+        console.log([...myMap1.values()]); // [1, 2, 3]
+
+        // 获取所有的键值对
+        console.log([...myMap1.entries()]); // [['a', 1], ['b', 2], ['c', 3]]1
+    </script>
+
+    <script>
+        // weakMap
+        // 1. 键必须是对象
+        // 2. 键是弱引用，不会阻止垃圾回收
+        // 3. 不能遍历
+        // 4. 没有clear方法
+        // 5. 没有size方法
+        // 6. 没有keys方法
+        // 7. 没有values方法
+        // 8. 没有entries方法
+        // 9. 没有forEach方法
+
+        // 创建一个新的 WeakMap
+        let weakMap = new WeakMap();
+
+        // 创建一些对象作为键
+        let key1 = {};
+        let key2 = function () { };
+
+        // 添加键值对
+        weakMap.set(key1, 'value1');
+        weakMap.set(key2, 'value2');
+
+        // 获取值
+        console.log(weakMap.get(key1)); // 'value1'
+
+        // 检查键是否存在
+        console.log(weakMap.has(key2)); // true
+
+        // 删除键值对
+        weakMap.delete(key1);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 字典 -->
+    <script>
+        // 字典
+        // 1、字典是一种以键值对形式存储数据的数据结构
+        // 2、字典也称作映射、符号表
+        // 3、字典的键是无序的
+        // 4、字典的键不能重复
+        // 5、字典的值可以重复
+        // 6、字典的键可以是任意数据类型
+        // 7、字典的值可以是任意数据类型
+        // 8、字典的键是唯一的
+        // 9、字典的值是无序的
+        // 10、字典的键是不可变的
+        // 11、字典的值是可变的
+        class Directionary {
+            table = {};
+            toStrFn(key) {
+                if (key === null) {
+                    return 'NULL';
+                } else if (key === undefined) {
+                    return 'UNDEFINED';
+                } else if (typeof key === 'string' || key instanceof String) {
+                    // return `${key}`;
+                    return key;
+                } else {
+                    return JSON.stringify(key);
+                }
+            }
+
+            hasKey(key) {
+                // 此处用 ！= null 代替了 !== undefined
+                return this.table[this.toStrFn(key)] != null;
+            }
+
+            set(key, value) {
+                if (key != null && value != null) {
+                    this.table[this.toStrFn(key)] = new ValuePair(key, value);
+                    return true;
+                }
+                return false;
+                // if (!this.hasKey(key)) {
+                //     this.table[this.toStrFn(key)] = value;
+                //     return true;
+                // }
+                // return false;
+            }
+
+            get(key) {
+                return this.hasKey(key) ? this.table[this.toStrFn(key)] : undefined;
+            }
+
+            remove(key) {
+                if (this.hasKey(key)) {
+                    delete this.table[this.toStrFn(key)];
+                    return true;
+                }
+                return false;
+            }
+
+            keyValues() {
+                return Object.values(this.table);
+            }
+
+            keys() {
+                return this.keyValues().map(valuePair => valuePair.key);
+            }
+
+            clear() {
+                this.table = {};
+            }
+
+            iEmpty() {
+                return this.size() === 0;
+            }
+
+            size() {
+                return Object.keys(this.table).length;
+            }
+
+            forEach(callbackFn) {
+                let values = this.keyValues();
+                for (let i = 0; i < values.length; i++) {
+                    let result = callbackFn(values[i].key, values[i].value);
+                }
+            };
+        }
+
+        class ValuePair {
+            constructor(key, value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

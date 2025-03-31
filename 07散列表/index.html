@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 字典 -->
+    <script>
+        // 散列表
+        // 散列表是一种以键值对形式存储数据的数据结构
+        // 散列表也称为哈希表
+        // 散列表的键是唯一的，不能重复
+        // 散列表的键是无序的，不能按照键的顺序访问
+        // 散列表的键是不可变的，不能修改键的值
+        // 散列表的键是可遍历的，不能使用for...in遍历
+        // 散列表的键是可枚举的，不能使用for...of遍历
+        // 散列表的键是可删除的，不能使用delete删除键
+        // 散列表的键是可迭代的，不能使用map、filter、reduce等方法
+        // 散列表的键是可序列化的，不能使用JSON.stringify序列化键
+        class HashTable {
+            table = {};
+            toStrFn(key) {
+                if (key === null) {
+                    return 'NULL';
+                } else if (key === undefined) {
+                    return 'UNDEFINED';
+                } else if (typeof key === 'string' || key instanceof String) {
+                    // return `${key}`;
+                    return key;
+                } else {
+                    return JSON.stringify(key);
+                }
+            }
+
+            // 散列函数
+            // 散列函数的作用是将键转换为一个数字，这个数字就是键在散列表中的位置
+            // 散列函数的目标是尽可能快地将键转换为一个数字
+            // 散列函数的要求是相同的键要得到相同的位置，不同的键要得到不同的位置
+            // 散列函数的实现方法有很多种，常见的有：除留余数法、霍纳法则、折叠法、平方取中法、MD5、SHA-1等
+            // 除留余数法是最常用的散列函数
+            // 除留余数法的实现方法是：将键转换为一个大整数，然后对一个素数取余
+            // 素数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数
+            // 素数的特点是：除了1和它本身以外不再有其他因数的自然数
+            // 素数的优点是：素数的因数只有1和它本身，所以素数的散列函数的目标是尽可能快地将键转换为一个素数
+            // 素数的缺点是：素数的因数只有1和它本身，所以素数的散列函数的目标是尽可能快地将键转换为一个素数
+            // 素数的实现方法是：将键转换为一个大整数，然后对一个素数取余
+            // 素数的实现方法是：将键转换为一个大整数，然后对一个素数取余
+            hashCode(key) {
+                if (typeof key === 'number') {
+                    return key;
+                }
+                const tableKey = this.toStrFn(key);
+                let hash = 5381;
+                for (let i = 0; i < tableKey.length; i++) {
+                    hash = hash * 33 + tableKey.charCodeAt(i);
+                }
+                return hash % 1013;
+            }
+
+            set(key, value) {
+                if (key != null && value != null) {
+                    const position = this.hashCode(key);
+                    this.table[position] = new ValuePair(key, value);
+                    return true
+                }
+                return false;
+            }
+
+            get(key) {
+                const valuePair = this.table[this.hashCode(key)];
+                return valuePair == null ? undefined : valuePair.value;
+            }
+
+            remove(key) {
+                const hash = this.hashCode(key);
+                const valuePair = this.table[hash];
+                if (valuePair != null) {
+                    delete this.table[hash];
+                    return true;
+                }
+                return false;
+            }
+
+
+        }
+
+        class ValuePair {
+            constructor(key, value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class doublyNode {
+            constructor(element) {
+                this.element = element;
+                this.next = null;
+                this.pre = null;
+            }
+        }
+        class doublyLinkedList {
+            constructor() {
+                this.count = 0;
+                this.head = null;
+                this.tail = null;   // 新增尾指针
+            }
+            push() {
+                const node = new doublyNode(element);
+                if (this.head === null) {
+                    // 当前链表没有节点时
+                    this.head = node;
+                    this.tail = node;
+                } else {
+                    // 当前链表有节点时
+                    // 找到尾部元素
+                    const tail = this.getTail();
+                    // 尾部节点next指向新节点
+                    tail.next = node;
+                    // 新节点pre指向尾部节点
+                    node.pre = tail;
+                    // 更新尾部节点
+                    this.tail = node;
+                }
+                this.count++;
+            }
+
+            // 插入元素
+            // 1、判断index是否越界
+            // 2、当count为0时，插入头节点
+            // 3、当count === index时，插入尾节点
+            // 4、当count > 1时，插入节点
+            // 5、更新count
+            // 6、返回true
+            insert(element, index) {
+                // 1...
+                if (index >= 0 && index <= this.count) {
+                    const node = new doublyNode(element);
+                    if (this.head === null) {
+                        // 2...
+                        this.head = node;
+                        this.tail = node;
+                    } else if (index === this.count) {
+                        // 3...
+                        this.push(node)
+                    } else {
+                        // 4...
+                        // 找到index位置节点, index位置节点的前一个节点
+                        const indexNode = this.findNodeAt(index);
+                        const indexPreNode = indexNode.pre;
+                        // 插入元素
+                        // 处理node和indexNode的关系
+                        node.next = indexNode;
+                        node.pre = indexPreNode;
+                        indexNode.pre = node;
+                        // 处理proeNde(preNode可能为null)
+                        indexPreNode && (indexPreNode.next = node);
+                    }
+                    this.count++;
+                    return true;
+                }
+                return false;
+            }
+
+            // 根据索引查找节点
+            findNodeAt(index) {
+                if (index >= 0 && index <= this.count) {
+                    let cur = this.head;
+                    for (let i = 0; i < this.count; i++) {
+                        if (i === index) {
+                            return cur;
+                        }
+                        cur = cur.next;
+                    }
+                }
+                return undefined;
+            }
+
+            // 根据值查找节点
+            findNode(element) {
+                let cur = this.head;
+                while (cur !== null) {
+                    if (cur.element === element) {
+                        return cur;
+                    } else {
+                        cur = cur.next;
+                    }
+                }
+                return undefined;
+            }
+            removeAt(index) {
+                if (index >= 0 && index < this.count) {
+                    let cur = this.head;
+                    if(index === 0) {
+                        // 删除头节点
+                        this.head = this.head.next;
+                        if(this.count === 1) {
+                            this.tail = null;
+                        } else {
+                            this.head.pre = null;
+                        }
+                    } else if(index === this.count - 1) {
+                        // 删除尾节点
+                        cur = this.tail;
+                        this.tail = this.tail.pre;
+                        this.tail.next = null;
+                    } else {
+                        // 删除中间节点
+                        cur = this.findNodeAt(index);
+                        const pre = cur.pre;
+                        pre.next = cur.next;
+                        cur.next.pre = pre;
+                    }
+                    this.count--;
+                    return cur.element;
+                }
+                return undefined;
+            }
+            getHead() { }
+            getTail() {
+                return this.tail;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

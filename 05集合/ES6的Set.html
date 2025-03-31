@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var set = new Set();
+        // 添加元素
+        set.add(1);
+        set.add(2);
+        // 元素数量
+        set.size; // 2
+        // 遍历元素
+        set.values(); // [1, 2]
+        // 判断元素是否存在
+        set.has(1); // true
+        // 删除元素
+        set.delete(1); // true
+        set.has(1); // false
+        // 清空集合
+        set.clear();
+        set.size; // 0
+
+    </script>
+
+
+    <!-- 并集 -->
+    <script>
+        let setA = new Set([1, 2, 3]);
+        let setB = new Set([3, 4, 5]);
+        let unionAB = new Set([...setA, ...setB]);
+        console.log(unionAB); // Set(5) { 1, 2, 3, 4, 5 }
+    </script>
+
+    <!-- 交集 -->
+     <script>
+        let setC = new Set([1, 2, 3]);
+        let setD = new Set([3, 4, 5]);
+        let intersectionAB = new Set([...setA].filter(x => setB.has(x)));
+        console.log(intersectionAB); // Set(1) { 3 }
+     </script>
+
+     <!-- 差集 -->
+      <script>
+        let setE = new Set([1, 2, 3]);
+        let setF = new Set([3, 4, 5]);
+        let differenceAB = new Set([...setA].filter(x => !setB.has(x)));
+        console.log(differenceAB); // Set(2) { 1, 2 }
+      </script>
+
+</body>
+
+</html>

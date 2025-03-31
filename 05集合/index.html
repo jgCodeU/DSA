@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class mySet {
+            // constructor() {
+            //     this.items = {};
+            // }
+            items = {};
+
+            has(element) {
+                // return Object.prototype.hasOwnProperty.call(this.items, element);
+                return element in this.items;
+            }
+            add(element) {
+                if (!this.has(element)) {
+                    this.items[element] = element;
+                    return true;
+                }
+                return false;
+            }
+            delete(element) {
+                if (this.has(element)) {
+                    delete this.items[element];
+                    return true;
+                }
+                return false;
+            }
+
+            clear() {
+                this.items = {};
+            }
+            size() {
+                return Object.keys(this.items).length;
+            }
+            values() {
+                return Object.values(this.items);
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 单链表
+        class Node {
+            constructor(element) {
+                this.element = element;
+                this.next = null;
+            }
+        }
+        class LinkedList {
+            constructor() {
+                this.count = 0;
+                this.head = null;
+            }
+            // 添加元素
+            push(element) {
+                const node = new Node(element);
+                if (this.count === 0) {
+                    this.head = node;
+                } else {
+                    let tail = this.getNodeAt(this.size() - 1);
+                    tail.next = node;
+                }
+                node.next = this.head;
+                this.count++;
+            }
+
+            // 查找指定位置的元素
+            getNodeAt(index) {
+                if (index >= 0 && index < this.count) {
+                    let cur = this.head;
+                    for (let i = 0; i < index; i++) {
+                        cur = cur.next;
+                    }
+                    return cur;
+
+                }
+                return undefined;
+            }
+
+            // 删除元素（按照索引、按照值）
+            // 指定位置删除
+            removeAt(index) {
+                if (index >= 0 && index < this.count) {
+                    let cur = this.head;
+                    let pre = null;
+                    if (index === 0) {
+                        this.head = this.head.next;
+                    } else {
+                        for (let i = 0; i < index; i++) {
+                            pre = cur;
+                            cur = cur.next;
+                        }
+                        pre.next = cur.next;
+
+                    }
+                    this.count--;
+                    return cur.element;
+
+                }
+                return undefined;
+            }
+            // 指定位置删除2
+            removeAt2(index) {
+                if (index >= 0 && index < this.count) {
+                    let cur = this.head;
+                    let pre = null;
+                    if (index === 0) {
+                        if (this.size() === 1) {
+                            this.head = null;
+                        } else {
+                            let tail = this.getNodeAt(this.size() - 1);
+                            this.head = this.head.next;
+                            tail.next = this.head;
+                        }
+                    } else {
+                        // 此处为改造点
+                        pre = this.getNodeAt(index - 1);
+                        pre.next = pre.next.next;
+                    }
+                    this.count--;
+                    return cur.element;
+
+                }
+                return undefined;
+            }
+
+            // 判断相等
+            equalFn(a, b) {
+                // 1、基本类型
+                return a === b;
+                // 2、引用类型
+                // return JSON.stringify(a) === JSON.stringify(b);
+                // 3、使用库
+                // imumutable
+            }
+
+            // 查找元素的位置
+            indexOf(element) {
+                let cur = this.head;
+                for (let i = 0; i < this.count; i++) {
+                    if (equalFn(this.cur.element, element)) {
+                        return i;
+                    }
+                    cur = cur.next;
+                }
+                return -1;
+            }
+
+            // 指定值删除
+            remove(element) {
+                const index = this.indexOf(element);
+                return this.removeAt(index);
+            }
+
+            insert(element, index) {
+                if (index >= 0 && index <= this.count) {
+                    const node = new Node(element);
+                    if (index === 0) {
+                        if (head === null) {
+                            this.head = node;
+                            node.next = this.head;
+                        } else {
+                            node.next = this.head;
+                            let tail = this.getNodeAt(this.size() - 1);
+                            tail.next = node;
+                            this.head = node;
+                        }
+
+                    } else {
+                        // 找到插入位置的前一个元素
+                        const pre = this.getNodeAt(index - 1);
+                        // 前一个元素 -> 新元素 -> 原来的元素
+                        node.next = pre.next;
+                        pre.next = node;
+                    }
+                    this.count++;
+                    return true;
+                }
+                return false;
+            }
+
+            // 此处封装是因为正常情况 this.count 需要设置成私有属性
+            size() {
+                return this.count;
+            }
+
+            isEmpty() {
+                return this.size() === 0;
+            }
+
+            getHead() {
+                return this.head;
+            }
+        }
+
+
+
+
+
+        // 双链表
+        // 循环链表
+        // 有序链表
+        // 链表的优点和缺点
+        // 链表的应用
+
+    </script>
+</body>
+
+</html>

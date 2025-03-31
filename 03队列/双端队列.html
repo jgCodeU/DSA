@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // double-ended queue
+        class Dequeue {
+            #count = 0;
+            #lowestCount = 0;
+            #items = {};
+            addBack(val) {
+                this.#items[this.#count] = val;
+                this.#count++;
+            }
+            removeFront() {
+                if (this.isEmpty()) {
+                    return undefined;
+                }
+                const result = this.#items[this.#lowestCount];
+                delete this.#items[this.#lowestCount];
+                this.#lowestCount++;
+                return result;
+            }
+            peekFront() {
+                return this.#items[this.#lowestCount];
+            }
+
+            addFront(val) {
+                if (this.isEmpty()) {
+                    this.addBack(val);
+                } else if (this.#lowestCount > 0) {
+                    this.#lowestCount--;
+                    this.#items[this.#lowestCount] = val;
+                } else {
+                    // #lowestCount === 0
+                    for (let i = this.#count; i > 0; i--) {
+                        this.#items[i] = this.#items[i - 1];
+                    }
+                    this.#items[0] = val;
+                    this.#count++;
+                }
+            }
+            removeBack() { 
+                if(this.isEmpty()) {
+                    return undefined;
+                }
+                this.#count--;
+                const result = this.#items[this.#count];
+                delete this.#items[this.#count];
+                return result;
+            }
+            peekBack() { 
+                return this.#items[this.#count - 1]; 
+            }
+            isEmpty() {
+                return this.size() === 0;
+            }
+            clear() {
+                this.#items = {};
+                this.#count = 0;
+                this.#lowestCount = 0;
+            }
+            size() {
+                return this.#count - this.#lowestCount;
+            }
+            toString() {
+                if (this.isEmpty()) {
+                    return '';
+                }
+                let objString = `${this.#items[this.#lowestCount]}`;
+                for (let i = this.#lowestCount + 1; i < this.#count; i++) {
+                    objString = `${objString}, ${this.#items[i]}`;
+                }
+                return objString;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

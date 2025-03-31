@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建数组
+        // 1、new Array()
+        // 2、数组字面量
+
+        // 访问数组元素
+        // 1、下标（索引）
+
+        // 数组方法
+        // 1、push() 末尾添加元素
+        // 2、pop() 末尾删除元素   
+        // 3、shift() 头部删除元素
+        // 4、unshift() 头部添加元素
+
+        // 5、splice(index, count, insertVal) 删除指定位置元素
+        const arr_splice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_splice', arr_splice.splice(2, 3), arr_splice)
+        // 6、slice(start, end) 截取数组(包含start，不包含end)
+        const arr_slice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_slice', arr_slice.slice(2, 4), arr_slice)
+
+        // 7、concat() 连接数组
+        const arr_concat1 = [1, 2, 3, 4, 5]
+        const arr_concat2 = [6, 7, 8, 9, 10]
+        console.log('arr_concat', arr_concat1.concat(arr_concat2), arr_concat1, arr_concat2)
+        // 8、join() 数组转字符串
+        // 9、reverse() 反转数组
+
+        // 10、sort() 排序数组（传入的函数返回值大于0则交换顺序，小于或等于0不交换顺序）
+        const arr_sort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        // console.log('arr_sort1', arr_sort.sort((a, b) => a - b), arr_sort)
+        console.log('arr_sort2', arr_sort.sort((a, b) => b - a), arr_sort)
+        // 对象数组排序
+        const people = [
+            { name: 'Alice', age: 30 },
+            { name: 'Bob', age: 25 },
+            { name: 'Charlie', age: 35 }
+        ];
+        people.sort((a, b) => a.age - b.age);
+        console.log('按年龄排序:', people);
+
+        // 11、indexOf() 查找元素
+        const arr_indexOf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_indexOf', arr_indexOf.indexOf(5), arr_indexOf)
+        console.log('arr_indexOf', arr_indexOf.indexOf(11), arr_indexOf)
+
+        // 12、lastIndexOf() 查找元素
+        const arr_lastIndexOf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_lastIndexOf', arr_lastIndexOf.lastIndexOf(5), arr_lastIndexOf)
+        console.log('arr_lastIndexOf', arr_lastIndexOf.lastIndexOf(11), arr_lastIndexOf)
+
+        // 13、forEach() 遍历数组
+
+        // 14、map() 遍历数组：将数组每个元素中带入执行函数，执行函数的返回值组成新数组（不修改原数组）
+        const arr_map = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_map', arr_map.map(item => item * 2), arr_map)
+
+        // 15、filter() 过滤数组：将数组中带入执行函数返回true，的元素放入新数组中返回（不修改原数组）
+        const arr_filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_filter > 5', arr_filter.filter(item => item > 5), arr_filter)
+        console.log('arr_filter >10', arr_filter.filter(item => item > 10), arr_filter)
+
+        // 16、reduce() 累加数组
+        // 17、some() 判断数组
+
+        // 18、every() 判断数组：数组中每一项带入执行函数都返回true，则返回true
+        const arr_every = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_every > 0', arr_every.every(item => item > 0))
+        console.log('arr_every > 10', arr_every.every(item => item > 10))
+
+        // 19、find() 查找满足条件的第一个元素
+        const arr_find = [1, 2, -1, 3, 4, 5, 6, 7, 8, 9, 10, 6, -1]
+        console.log('arr_find', arr_find.find(item => item === -1), arr_find)
+        console.log('arr_find', arr_find.find(item => item === -2), arr_find)
+        // 20、findIndex() 查找数组
+        const arr_findIndex = [1, 2, -1, 3, 4, 5, 6, 7, 8, 9, 10, 6, -1]
+        console.log('arr_findIndex', arr_findIndex.findIndex(item => item === -1), arr_findIndex)
+        console.log('arr_findIndex', arr_findIndex.findIndex(item => item === -2), arr_findIndex)
+
+        // 21、fill() 填充数组
+
+        // 22、includes() 判断数组是否包含某个元素
+        const arr_includes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log('arr_includes', arr_includes.includes(5), arr_includes)
+        console.log('arr_includes', arr_includes.includes(11), arr_includes)
+
+        // 23、flat() 数组扁平化
+        // 24、flatMap() 数组扁平化
+
+        // 25、from() 类数组对象、可迭代对象数转换为数组
+        // 1. 从字符串创建数组
+        const str = 'hello';
+        console.log(Array.from(str)); // ['h', 'e', 'l', 'l', 'o']
+        // 2. 从 Set 创建数组
+        const set = new Set(['foo', 'bar', 'baz', 'foo']);
+        console.log(Array.from(set)); // ['foo', 'bar', 'baz']
+        // 3. 从类数组对象创建数组
+        const arrayLike = { length: 3, 0: 'a', 1: 'b', 2: 'c' };
+        console.log(Array.from(arrayLike)); // ['a', 'b', 'c']
+        // 4. 使用 mapFn 参数
+        console.log(Array.from([1, 2, 3], x => x * x)); // [1, 4, 9]
+        // 5. 生成数字序列
+        console.log(Array.from({ length: 5 }, (v, i) => i)); // [0, 1, 2, 3, 4]
+        // 6. 将 NodeList 转换为数组
+        // 假设 HTML 中有 <p> 元素
+        const paragraphs = document.getElementsByTagName('p');
+        const paragraphArray = Array.from(paragraphs);
+        // 7. 克隆数组
+        const originalArray = [1, 2, 3];
+        const clonedArray = Array.from(originalArray);
+
+        // 26、of() 数组转对象
+        // 27、entries() 数组转对象
+        // 28、keys() 数组转对象
+        // 29、values() 数组转对象
+        // 30、toLocaleString() 数组转字符串
+        // 31、toString() 数组转字符串
+        // 32、valueOf() 数组转字符串
+        // 33、copyWithin() 复制数组
+        // 34、isArray() 判断数组
+        // 35、Array.isArray() 判断数组
+        // 36、Array.from() 数组转对象
+        // 37、Array.of() 数组转对象
+
+
+
+
+    </script>
+</body>
+
+</html>

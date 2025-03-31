@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 出队时，数组需要移动元素，效率较低
+        // 使用对象模拟数组实现队列
+        class Queue {
+            #count = 0;
+            #lowestCount = 0;
+            #items = {};
+            enqueue(val) {
+                this.#items[this.#count] = val;
+                this.#count++;
+            }
+            dequeue() {
+                if (this.isEmpty()) {
+                    return undefined;
+                }
+                const result = this.#items[this.#lowestCount];
+                delete this.#items[this.#lowestCount];
+                this.#lowestCount++;
+                return result;
+            }
+            front() {
+                return this.#items[this.#lowestCount];
+            }
+            isEmpty() {
+                return this.size() === 0;
+            }
+            clear() {
+                this.#items = {};
+                this.#count = 0;
+                this.#lowestCount = 0;
+            }
+            size() {
+                return this.#count - this.#lowestCount;
+            }
+            toString() {
+                if (this.isEmpty()) {
+                    return '';
+                }
+                let objString = `${this.#items[this.#lowestCount]}`;
+                for (let i = this.#lowestCount + 1; i < this.#count; i++) {
+                    objString = `${objString}, ${this.#items[i]}`;
+                }
+                return objString;
+            }
+        }
+
+        // 击鼓传花
+        function passGame(nameList, num) {
+            passGameQueue = new Queue();
+            nameList.forEach((name) => {
+                passGameQueue.enqueue(name);
+            })
+            while (passGameQueue.size() > 1) {
+                for (let i = 0; i < num; i++) {
+                    passGameQueue.enqueue(passGameQueue.dequeue());
+                }
+                console.log('出局者：', passGameQueue.dequeue());
+            }
+            console.log('胜利者：', passGameQueue.front());
+
+        }
+        const nameList = [1, 2, 3, 4, 5]
+        passGame(nameList, 7)
+    </script>
+</body>
+
+</html>

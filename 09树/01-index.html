@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        // 二叉搜索树
+        // 每个节点最多有两个子节点：左子节点和右子节点。
+        // 对于树中的每个节点：
+        // 左子树中所有节点的值都小于该节点的值
+        // 右子树中所有节点的值都大于该节点的值
+        // 左右子树也分别是二叉搜索树
+
+        class Node {
+            constructor(key, left = null, right = null) {
+                this.key = key;
+                this.left = left;
+                this.right = right;
+            }
+        }
+
+
+        class BST {
+            constructor() {
+                this.root = null;
+            }
+
+            insert(key) {
+                if (this.root === null) {
+                    this.root = new Node(key);
+                } else {
+                    this.insertNode(this.root, key);
+                }
+            }
+
+            Compare = {
+                LESS: -1,
+                BIGGER: 1,
+                EQUALS: 0
+            }
+            compareFn(a, b) {
+                if (a === b) {
+                    return this.Compare.EQUALS;
+                } else if (a < b) {
+                    return this.Compare.LESS;
+                } else {
+                    return this.Compare.BIGGER;
+                }
+            }
+            insertNode(node, key) {
+                if (this.compareFn(key, node.key) === this.Compare.LESS) {
+                    if (node.left === null) {
+                        node.left = new Node(key);
+                    } else {
+                        this.insertNode(node.left, key);
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = new Node(key);
+                    } else {
+                        this.insertNode(node.riht, key);
+                    }
+                }
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

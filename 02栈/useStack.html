@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 封装栈类
+        class Stack {
+            // constructor() {
+            //     this.#items = [];
+            // }
+            #items = [];
+            push(val) {
+                this.#items.push(val);
+            }
+            pop() {
+                return this.#items.pop();
+            }
+            peek() {
+                // return this.#items[this.#items.length - 1];
+                return this.#items.at(-1);
+            }
+            isEmpty() {
+                return this.#items.length === 0;
+            }
+            clear() {
+                this.#items = [];
+            }
+            size() {
+                return this.#items.length;
+            }
+            toString() {
+                return this.#items.join(' ');
+            }
+        }
+
+        // 十进制转换为二、八、十六进制
+        function dec2bin(decNumber, base) {
+            const baseStr = '0123456789ABCDEF';
+            const stack = new Stack();
+            while (decNumber > 0) {
+                stack.push(decNumber % base);
+                decNumber = Math.floor(decNumber / base);
+            }
+            let res = '';
+            while (!stack.isEmpty()) {
+                res += baseStr[stack.pop()];
+            }
+            return res;
+        }
+        console.log('useStack', dec2bin(10, 2));
+        console.log('useStack', dec2bin(100, 2));
+        console.log('useStack', dec2bin(10, 16));
+        console.log('useStack', dec2bin(100, 16));
+
+
+    </script>
+</body>
+
+</html>
