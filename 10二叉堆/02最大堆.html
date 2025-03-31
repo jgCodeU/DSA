@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 最大堆
+        // 二叉堆是一种特殊的二叉树：完全二叉树
+        // 二叉堆有两种：最大堆和最小堆
+        // 最大堆：父节点的值总是大于或等于任何一个子节点的值
+        // 最小堆：父节点的值总是小于或等于任何一个子节点的值
+        // 二叉堆的根节点叫做堆顶
+        // 二叉堆的最后一个节点叫做堆底
+        // 二叉堆的最后一个非叶子节点叫做堆的最后一个非叶子节点
+        class Node {
+            constructor(value) {
+                this.value = value;
+                this.left = null;
+                this.right = null;
+            }
+        }
+
+        class MinHeap {
+            constructor() {
+                this.heap = [];
+            }
+
+            getLeftIndex(index) {
+                return 2 * index + 1;
+            }
+            getRightIndex(index) {
+                return 2 * index + 2;
+            }
+
+            getParentIndex(index) {
+                return Math.floor((index - 1) / 2);
+            }
+
+            swap(array, a, b) {
+                let temp = array[a];
+                array[a] = array[b];
+                array[b] = temp;
+            }
+
+            siftUp(index) {
+                let parentIndex = this.getParentIndex(index);
+                while (index > 0 && this.heap[parentIndex] < this.heap[index]) {
+                    this.swap(this.heap, parentIndex, index);
+                    index = parentIndex;
+                    parentIndex = this.getParentIndex(index);
+                }
+            }
+
+            insert(value) {
+                if (value != null) {
+                    this.heap.push(value);
+                    // 与父节点对比，如果大于父节点，则交换位置
+                    this.siftUp(this.heap.length - 1);
+                    return true;
+                }
+                return false;
+            }
+
+            size() {
+                return this.heap.length;
+            }
+
+            isEmpty() {
+                return this.size() === 0;
+            }
+
+            shiftDown(index) {
+                let cur = index;
+                let left = this.getLeftIndex(cur);
+                let right = this.getRightIndex(cur);
+                let size = this.size();
+                if (left < size && this.heap[left] > this.heap[cur]) {
+                    cur = left;
+                }
+                if (right < size && this.heap[right] > this.heap[cur]) {
+                    cur = right;
+                }
+                if (cur !== index) {
+                    this.swap(this.heap, cur, index);
+                    this.shiftDown(cur);
+                }
+            }
+
+            // 删除堆顶
+            // 1. 用堆的最后一个元素替换堆顶元素
+            // 2. 删除最后一个元素
+            // 3. 从堆顶开始堆化
+            // 4. 从堆顶开始，比较左右子节点，如果左右子节点都大于当前节点，则不交换位置
+            // 5. 如果左右子节点有一个小于当前节点，则交换位置
+            // 6. 交换位置后，继续从交换位置的节点开始堆化
+            // 7. 直到左右子节点都大于当前节点或者当前节点没有子节点
+            // 8. 返回堆顶元素
+            // 9. 时间复杂度：O(logn)
+            extract() {
+                if (this.isEmpty()) {
+                    return null;
+                }
+                if (this.size() === 1) {
+                    return this.heap.shift();
+                }
+                this.heap[0] = this.heap.pop();
+                this.shiftDown(0);
+                return this.heap[0];
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
