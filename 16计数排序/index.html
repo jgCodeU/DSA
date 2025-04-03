@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 计数排序
+        // 计数排序是一种非比较排序算法
+        // 计数排序的时间复杂度为O(n+k)，其中n为待排序数组的长度，k为待排序数组中最大值和最小值之差
+        // 计数排序的空间复杂度为O(k)
+        // 计数排序的稳定性为稳定排序
+        // 计数排序的基本思想是：统计待排序数组中每个元素出现的次数，然后根据这些次数计算出每个元素在排序后数组中的位置
+        // 计数排序的基本步骤如下：
+        // 1. 找出待排序数组中的最大值和最小值
+        // 2. 计算待排序数组中每个元素出现的次数
+        // 3. 计算每个元素在排序后数组中的位置
+        // 4. 根据每个元素在排序后数组中的位置，将待排序数组中的元素放入排序后数组中
+        // 5. 将排序后数组中的元素复制到待排序数组中
+        // 6. 返回排序后数组
+        function countSort(arr) {
+            if (arr.length <= 1) return arr;
+            const { length } = arr;
+            // let min = Math.min(...arr);
+            let max = Math.max(...arr);
+            let count = new Array(max + 1).fill(0);
+            for (let i = 0; i < length; i++) {
+                count[arr[i]]++;
+            }
+            let newArr = [];
+            for (let i = 0; i < count.length; i++) {
+                while (count[i] > 0) {
+                    newArr.push(i);
+                    count[i]--;
+                }
+            }
+            return newArr;
+        }
+
+
+        // 优化
+        function countSort1(arr) {
+            if (arr.length <= 1) return arr;
+            const { length } = arr;
+            let min = Math.min(...arr);
+            let max = Math.max(...arr);
+            let count = new Array(max - min + 1).fill(0);
+            for (let i = 0; i < length; i++) {
+                count[arr[i] - min]++;
+            }
+            let newArr = [];
+            for (let i = 0; i < count.length; i++) {
+                while (count[i] > 0) {
+                    newArr.push(i + min);
+                    count[i]--;
+                }
+            }
+            return newArr;
+        }
+
+    </script>
+
+</body>
+
+</html>

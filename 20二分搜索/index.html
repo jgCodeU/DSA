@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 二分搜索
+        // 二分搜索是一种高效的搜索算法
+        // 二分搜索的时间复杂度为O(log n)
+        // 二分搜索的空间复杂度为O(1)
+        // 二分搜索的稳定性为不稳定排序
+        function binarySearch(arr, target) {
+            let left = 0;
+            let right = arr.length - 1;
+            while (left <= right) {
+                let mid = Math.floor((left + right) / 2);
+                if (arr[mid] === target) {
+                    return mid;
+                } else if (arr[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return -1;
+        }
+        // 二分搜索的基本思想是：将待搜索数组分成两半，判断中间元素与目标元素的大小关系
+        // 如果中间元素等于目标元素，则返回中间元素的索引
+        // 如果中间元素小于目标元素，则在右半部分继续搜索
+        // 如果中间元素大于目标元素，则在左半部分继续搜索
+    </script>
+
+</body>
+
+</html>
