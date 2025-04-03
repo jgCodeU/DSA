@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 快速排序
+        function swap(arr, a, b) {
+            let temp = arr[a];
+            arr[a] = arr[b];
+            arr[b] = temp;
+        }
+        function quickSort(arr) {
+            if (length <= 1) return arr;
+            const { length } = arr;
+            let bath = arr[0];
+            let minArr = arr.slice(1).filter(item => item <= bath);
+            let maxArr = arr.slice(1).filter(item => item > bath);
+            return quickSort(minArr).concat(bath).concat(quickSort(maxArr));
+        }
+
+    </script>
+
+</body>
+
+</html>
