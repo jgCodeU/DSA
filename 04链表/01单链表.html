@@ -9,7 +9,12 @@
 
 <body>
     <script>
-        // 单链表
+        // 单链表: head -> node1 -> node2 -> node3 -> null
+        // 双链表: head -> node1 <-> node2 <-> node3 -> null
+        // 循环链表: head -> node1 -> node2 -> node3 -> node1
+        // 有序链表: head -> node1 -> node2 -> node3 -> node4 -> node5 -> node6 -> null
+
+        // 节点
         class Node {
             constructor(element) {
                 this.element = element;
@@ -38,56 +43,39 @@
 
             // 查找指定位置的元素
             getNodeAt(index) {
-                if (index >= 0 && index < this.count) {
-                    let cur = this.head;
-                    for (let i = 0; i < index; i++) {
-                        cur = cur.next;
-                    }
-                    return cur;
-
+                // index 合法性判断
+                if (index < 0 || index >= this.count) {
+                    return undefined;
                 }
-                return undefined;
+                let cur = this.head;
+                for (let i = 0; i < index; i++) {
+                    cur = cur.next;
+                }
+                return cur;
             }
 
-            // 删除元素（按照索引、按照值）
             // 指定位置删除
+            // 删除指定位置元素
+            // 找到删除的节点的前一个节点和当前节点
+            // 让前一个节点的next指向当前节点的next
             removeAt(index) {
-                if (index >= 0 && index < this.count) {
-                    let cur = this.head;
-                    let pre = null;
-                    if (index === 0) {
-                        this.head = this.head.next;
-                    } else {
-                        for (let i = 0; i < index; i++) {
-                            pre = cur;
-                            cur = cur.next;
-                        }
-                        pre.next = cur.next;
-
-                    }
-                    this.count--;
-                    return cur.element;
-
+                // index 合法性判断
+                if (index < 0 || index >= this.count) {
+                    return undefined;
                 }
-                return undefined;
-            }
-            // 指定位置删除2
-            removeAt2(index) {
-                if (index >= 0 && index < this.count) {
-                    let cur = this.head;
-                    let pre = null;
-                    if (index === 0) {
-                        this.head = this.head.next;
-                    } else {
-                        // 此处为改造点
-                        pre = this.getNodeAt(index - 1);
-                        pre.next = pre.next.next;
-                    }
-                    this.count--;
-                    return cur.element;
-
+                let pre = null;
+                let cur = this.head;
+                if (index === 0) {
+                    this.head = this.head.next;
+                } else {
+                    // 找到删除的节点的前一个节点和当前节点
+                    // 让前一个节点的next指向当前节点的next
+                    pre = this.getNodeAt(index - 1);
+                    cur = pre.next;
+                    pre.next = cur.next;
                 }
-                return undefined;
+                this.count--;
+                return cur.element;
             }
 
             // 判断相等
@@ -118,24 +106,28 @@
                 return this.removeAt(index);
             }
 
+            // 插入元素
+            // 在指定位置插入元素
+            // 1. 找到指定位置的前一个节点
+            // 2. 创建新节点
+            // 3. 将新节点的next指向前一个节点的next
+            // 4. 将前一个节点的next指向新节点
             insert(element, index) {
-                if (index >= 0 && index <= this.count) {
-                    const node = new Node(element);
-                    if (index === 0) {
-                        const cur = this.head;
-                        this.head = node;
-                        this.head.next = cur;
-                    } else {
-                        // 找到插入位置的前一个元素
-                        const pre = this.getNodeAt(index - 1);
-                        // 前一个元素 -> 新元素 -> 原来的元素
-                        node.next = pre.next;
-                        pre.next = node;
-                    }
-                    this.count++;
-                    return true;
+                // 判断index合法性
+                if (index < 0 || index > this.count) {
+                    return false;
                 }
-                return false;
+                if (index === 0) {
+                    const cur = this.head;
+                    this.head = new Node(element);
+                    this.head.next = cur;
+                } else {
+                    const pre = this.getNodeAt(index - 1);
+                    const cur = pre.next;
+                    const node = new Node(element);
+                }
+                this.count++;
+                return true;
             }
 
             // 此处封装是因为正常情况 this.count 需要设置成私有属性

@@ -22,10 +22,10 @@
         // 3、shift() 头部删除元素
         // 4、unshift() 头部添加元素
 
-        // 5、splice(index, count, insertVal) 删除指定位置元素
+        // 5、splice(index, count, insertVal) 删除指定位置元素，插入新元素(修改原数组)
         const arr_splice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         console.log('arr_splice', arr_splice.splice(2, 3), arr_splice)
-        // 6、slice(start, end) 截取数组(包含start，不包含end)
+        // 6、slice(start, end) 截取数组(包含start，不包含end)(不修改原数组)
         const arr_slice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         console.log('arr_slice', arr_slice.slice(2, 4), arr_slice)
 
@@ -55,7 +55,7 @@
         console.log('arr_indexOf', arr_indexOf.indexOf(11), arr_indexOf)
 
         // 12、lastIndexOf() 查找元素
-        const arr_lastIndexOf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        const arr_lastIndexOf = [1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10]
         console.log('arr_lastIndexOf', arr_lastIndexOf.lastIndexOf(5), arr_lastIndexOf)
         console.log('arr_lastIndexOf', arr_lastIndexOf.lastIndexOf(11), arr_lastIndexOf)
 

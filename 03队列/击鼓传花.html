@@ -57,10 +57,12 @@
         // 击鼓传花
         function passGame(nameList, num) {
             passGameQueue = new Queue();
+            // nameList 入队
             nameList.forEach((name) => {
                 passGameQueue.enqueue(name);
             })
             while (passGameQueue.size() > 1) {
+                // 依次取出队头，放到队尾
                 for (let i = 0; i < num; i++) {
                     passGameQueue.enqueue(passGameQueue.dequeue());
                 }
