@@ -10,6 +10,12 @@
 <body>
     <script>
         // 归并排序
+        // 1. 将数组分成两半
+        // 2. 递归地对每一半进行排序
+        // 3. 将两个已排序的数组合并成一个新的已排序数组
+        // 4. 返回已排序的数组
+        // 5. 时间复杂度: O(nlogn)
+        // 6. 空间复杂度: O(n)
         function mergeSort(arr) {
             if (arr.length > 1) {
                 let mid = Math.floor(arr.length / 2);

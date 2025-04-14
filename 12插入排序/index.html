@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 插入排序(将无序区间的第一个元素，插入到有序区间的合适位置)
+        // 1. 从第一个元素开始，认为第一个元素是有序的
+        // 2. 从第二个元素开始，依次与前面的元素进行比较
+        // 3. 如果当前元素小于前面的元素，则将前面的元素向后移动一位
+        // 4. 将当前元素插入到合适的位置
+        // 5. 重复步骤2-4，直到所有元素都被插入到有序的位置
+        // 6. 返回排序后的数组
+        // 7. 时间复杂度: O(n^2)
+        // 8. 空间复杂度: O(1)
+        function swap(arr, a, b) {
+            let temp = arr[a];
+            arr[a] = arr[b];
+            arr[b] = temp;
+        }
+        function insertSort(arr) {
+            for (let i = 1; i <= arr.length - 1; i++) {
+                let j = i;
+                while (j >= 1 && arr[j] < arr[j - 1]) {
+                    swap(arr, j, j - 1);
+                    j--;
+                }
+            }
+            return arr;
+        }
+
+    </script>
+
+</body>
+
+</html>
