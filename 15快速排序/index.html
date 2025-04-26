@@ -10,11 +10,11 @@
 <body>
     <script>
         // 快速排序
-        function swap(arr, a, b) {
-            let temp = arr[a];
-            arr[a] = arr[b];
-            arr[b] = temp;
-        }
+        // 1. 选择一个基准元素
+        // 2. 将数组分成两个子数组，一个子数组中的元素都小于基准元素，另一个子数组中的元素都大于基准元素
+        // 3. 对两个子数组进行递归排序
+        // 4. 返回已排序的数组
+        // 5. 时间复杂度: O(nlogn)
         function quickSort(arr) {
             if (length <= 1) return arr;
             const { length } = arr;

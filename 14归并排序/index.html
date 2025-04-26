@@ -17,7 +17,7 @@
         // 5. 时间复杂度: O(nlogn)
         // 6. 空间复杂度: O(n)
         function mergeSort(arr) {
-            if (arr.length > 1) {
+            if (arr.length >= 2) {
                 let mid = Math.floor(arr.length / 2);
                 let left = mergeSort(arr.slice(0, mid));
                 let right = mergeSort(arr.slice(mid));
